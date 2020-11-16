@@ -1,5 +1,7 @@
 package com.test.yhlee;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.assertj.core.util.Lists;
@@ -11,28 +13,30 @@ public class BaseballGame {
 	private static List<Integer> comNumberList = Lists.newArrayList();
 	private static List<Integer> strike = Lists.newArrayList();
 	private static List<Integer> ball = Lists.newArrayList();
+	private String GAME_STATUS_CHECK = "yes";
+	private final int SIZE = 3;
 	
 	@Test
 	@DisplayName("baseballGame")
 	void baseballGame() {
-		comNumberList = RandomNumber.comNumber();
-		System.out.print("컴퓨터의 입력된 숫자 -> ");
-		for (Integer comNumber : comNumberList) {
-			System.out.print(comNumber);
+		assertThat(SIZE).isBetween(1, 9);
+		while(GAME_STATUS_CHECK.equals("yes")) {
+			init();
+			comNumberList = RandomNumber.comNumber(SIZE);
+			UiClass.checkCumNumber(comNumberList);
+			playTheGame();
+			GAME_STATUS_CHECK = UiClass.gameStatus();
 		}
-		System.out.println();
-		playTheGame();
+		UiClass.endGame();
 	}
 
 	void playTheGame() {
-		while(strike.size() != 3) {
-			strike = Lists.newArrayList();
-			ball = Lists.newArrayList();
-			List<Integer> userNumber = UserNumber.userNumberList();
+		while(strike.size() != SIZE) {
+			init();
+			List<Integer> userNumber = UserNumber.userNumberList(SIZE);
 			windUp(userNumber);
-			System.out.println(strike.size()+" strike, "+ ball.size()+ " ball");
+			UiClass.result(strike, ball);
 		}
-		
 	}
 	
 	void windUp(List<Integer> userNumber) {
@@ -54,5 +58,10 @@ public class BaseballGame {
 		if(checkList.contains(comNumber) && !strike.contains(comNumber)) {
 			ball.add(comNumber);
 		}
+	}
+	
+	void init() {
+		strike = Lists.newArrayList();
+		ball = Lists.newArrayList();
 	}
 }

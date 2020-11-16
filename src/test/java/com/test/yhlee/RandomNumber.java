@@ -14,17 +14,18 @@ public class RandomNumber {
 	@Test
 	@DisplayName("랜덤 수에 대한 확인을 진행한다.")
 	void randomNumberTest(){
-		List<Integer> comNumberList = comNumber();
-		assertThat(comNumberList.size()).isEqualTo(3);
+		int size = 3;
+		List<Integer> comNumberList = comNumber(size);
+		assertThat(comNumberList.size()).isEqualTo(size);
 		for (Integer comNumber : comNumberList) {
 			System.out.print(comNumber);
 		}
 		System.out.println();
 	}
 	
-	public static List<Integer> comNumber(){
+	public static List<Integer> comNumber(int size){
 		List<Integer> comNumberList = Lists.newArrayList();
-		while(comNumberList.size() < 3) {
+		while(comNumberList.size() < size) {
 			makeRandomNumber(comNumberList);
 		}
 		return comNumberList;

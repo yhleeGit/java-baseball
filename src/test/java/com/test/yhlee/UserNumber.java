@@ -16,19 +16,20 @@ public class UserNumber {
 	@Test
 	@DisplayName("사용자 입력값에 대한 테스트")
 	void userNameCheckTest() {
-		List<Integer> userNumberList = userNumberList();
-		assertThat(userNumberList.size()).isEqualTo(3);
+		int size = 3;
+		List<Integer> userNumberList = userNumberList(size);
+		assertThat(userNumberList.size()).isEqualTo(size);
 	}
 	
-	public static List<Integer> userNumberList() {
+	public static List<Integer> userNumberList(int size) {
 		sc = new Scanner(System.in);
 		System.out.println("숫자를 입력해 주세요.");
 		int userInputNumber = sc.nextInt();
 		String convert = String.valueOf(userInputNumber);
-		assertThat(convert.length()).isEqualTo(3);
+		assertThat(convert.length()).isEqualTo(size);
 		
 		List<Integer> userNumber = Lists.newArrayList();
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < size; i++) {
 			userNumber.add(Character.getNumericValue(convert.charAt(i)));
 		}
 		return userNumber;
