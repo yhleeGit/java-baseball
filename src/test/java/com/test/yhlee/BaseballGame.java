@@ -1,5 +1,41 @@
 package com.test.yhlee;
 
+import java.util.List;
+
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 public class BaseballGame {
 
+	private static List<Integer> comNumberList = Lists.newArrayList();
+	private static List<Integer> strike = Lists.newArrayList();
+	private static List<Integer> ball = Lists.newArrayList();
+	
+	@Test
+	@DisplayName("baseballGame")
+	void baseballGame() {
+		comNumberList = RandomNumber.comNumber();
+		System.out.print("컴퓨터의 입력된 숫자 -> ");
+		for (Integer comNumber : comNumberList) {
+			System.out.print(comNumber);
+		}
+		System.out.println();
+		playTheGame();
+	}
+
+	void playTheGame() {
+		List<Integer> userNumber = UserNumber.userNumberList();
+		for(int i=0; i<comNumberList.size(); i++) {
+			strikeCheck(userNumber, i);
+		}
+		System.out.println(strike.size()+" strike, "+ ball.size()+ " ball");
+	}
+	
+	void strikeCheck(List<Integer> checkList, int seq) {
+		Integer comNumber = comNumberList.get(seq);
+		if(comNumber.equals(checkList.get(seq))) {
+			strike.add(comNumber);
+		}
+	}
 }
