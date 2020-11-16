@@ -28,6 +28,7 @@ public class BaseballGame {
 		List<Integer> userNumber = UserNumber.userNumberList();
 		for(int i=0; i<comNumberList.size(); i++) {
 			strikeCheck(userNumber, i);
+			ballCheck(userNumber, i);
 		}
 		System.out.println(strike.size()+" strike, "+ ball.size()+ " ball");
 	}
@@ -36,6 +37,13 @@ public class BaseballGame {
 		Integer comNumber = comNumberList.get(seq);
 		if(comNumber.equals(checkList.get(seq))) {
 			strike.add(comNumber);
+		}
+	}
+
+	void ballCheck(List<Integer> checkList ,int seq) {
+		Integer comNumber = comNumberList.get(seq);
+		if(checkList.contains(comNumber) && !strike.contains(comNumber)) {
+			ball.add(comNumber);
 		}
 	}
 }
