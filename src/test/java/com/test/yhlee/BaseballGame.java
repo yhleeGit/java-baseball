@@ -25,12 +25,21 @@ public class BaseballGame {
 	}
 
 	void playTheGame() {
-		List<Integer> userNumber = UserNumber.userNumberList();
+		while(strike.size() != 3) {
+			strike = Lists.newArrayList();
+			ball = Lists.newArrayList();
+			List<Integer> userNumber = UserNumber.userNumberList();
+			windUp(userNumber);
+			System.out.println(strike.size()+" strike, "+ ball.size()+ " ball");
+		}
+		
+	}
+	
+	void windUp(List<Integer> userNumber) {
 		for(int i=0; i<comNumberList.size(); i++) {
 			strikeCheck(userNumber, i);
 			ballCheck(userNumber, i);
 		}
-		System.out.println(strike.size()+" strike, "+ ball.size()+ " ball");
 	}
 	
 	void strikeCheck(List<Integer> checkList, int seq) {
