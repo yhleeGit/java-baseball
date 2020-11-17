@@ -35,7 +35,7 @@ public class BaseballGame {
 			init();
 			List<Integer> userNumber = UserNumber.userNumberList(SIZE);
 			windUp(userNumber);
-			UiClass.result(strike, ball);
+			UiClass.result(strike, ball); 
 		}
 	}
 	
