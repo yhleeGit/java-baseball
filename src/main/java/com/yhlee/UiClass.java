@@ -1,4 +1,4 @@
-package com.test.yhlee;
+package com.yhlee;
 
 import java.util.List;
 import java.util.Scanner;
